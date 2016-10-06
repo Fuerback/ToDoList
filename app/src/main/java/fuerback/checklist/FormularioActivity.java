@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,8 +54,13 @@ public class FormularioActivity extends AppCompatActivity {
                 Atividade atividade = helper.getAtividade();
                 AtividadeDAO dao = new AtividadeDAO(FormularioActivity.this);
 
-                dao.insere(atividade);
-                Toast.makeText(FormularioActivity.this, "Atividade " + atividade.getNome() + " salva!", Toast.LENGTH_SHORT).show();
+                if(atividade.getId() != null){
+                    dao.altera(atividade);
+                    Toast.makeText(FormularioActivity.this, "Atividade " + atividade.getNome() + " editada!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dao.insere(atividade);
+                    Toast.makeText(FormularioActivity.this, "Atividade " + atividade.getNome() + " salva!", Toast.LENGTH_SHORT).show();
+                }
 
                 dao.close();
                 finish();
@@ -62,6 +68,4 @@ public class FormularioActivity extends AppCompatActivity {
         });
 
     }
-
-
 }

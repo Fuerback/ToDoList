@@ -68,4 +68,11 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         String[] params = {atividade.getId().toString()};
         db.delete("CheckList", "id = ?", params);
     }
+
+    public void altera(Atividade atividade) {
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues dados = getDadosAluno(atividade);
+        String[] params = {atividade.getId().toString()};
+        db.update("CheckList", dados, "id = ?", params);
+    }
 }
