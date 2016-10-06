@@ -3,11 +3,15 @@ package fuerback.checklist;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -60,5 +64,26 @@ public class ListaAtividadesActivity extends AppCompatActivity {
 
         ArrayAdapter<Atividade> adapter = new ArrayAdapter<Atividade>(this, android.R.layout.simple_list_item_1, atividades);
         listaAtividade.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Atividade atividade = (Atividade) listaAtividade.getItemAtPosition(info.position);
+
+        MenuItem deletar = menu.add("Deletar");
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AtividadeDAO dao = new AtividadeDAO(ListaAtividadesActivity.this);
+                dao.deleta(atividade);
+                dao.close();
+
+                carregaLista();
+
+                Toast.makeText(ListaAtividadesActivity.this, "Atividade " + atividade.getNome() + " deletada!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 }

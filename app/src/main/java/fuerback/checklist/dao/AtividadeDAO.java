@@ -62,4 +62,10 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         }
         return alunos;
     }
+
+    public void deleta(Atividade atividade) {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] params = {atividade.getId().toString()};
+        db.delete("CheckList", "id = ?", params);
+    }
 }
