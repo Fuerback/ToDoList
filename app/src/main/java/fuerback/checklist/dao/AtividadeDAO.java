@@ -53,12 +53,12 @@ public class AtividadeDAO extends SQLiteOpenHelper {
 
         List<Atividade> alunos = new ArrayList<Atividade>();
         while(cursor.moveToNext()){
-            Atividade aluno = new Atividade();
-            aluno.setId(cursor.getLong(cursor.getColumnIndex("id")));
-            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
-            aluno.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
-            aluno.setPrioridade(cursor.getInt(cursor.getColumnIndex("prioridade")));
-            alunos.add(aluno);
+            Atividade atividade = new Atividade();
+            atividade.setId(cursor.getLong(cursor.getColumnIndex("id")));
+            atividade.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            atividade.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
+            atividade.setPrioridade(cursor.getInt(cursor.getColumnIndex("prioridade")));
+            alunos.add(atividade);
         }
         return alunos;
     }

@@ -29,18 +29,17 @@ public class FormularioHelper {
         atividade = new Atividade();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public Atividade getAtividade() {
         atividade.setNome(campoNome.getText().toString());
         atividade.setDescricao(campoDescricao.getText().toString());
-        atividade.setPrioridade(campoprioridade.getGravity());
+        atividade.setPrioridade(campoprioridade.getSelectedItemPosition());
         return atividade;
     }
 
     public void preencheFormulario(Atividade atividade) {
         campoNome.setText(atividade.getNome());
         campoDescricao.setText(atividade.getDescricao());
-        campoprioridade.setGravity(atividade.getPrioridade());
+        campoprioridade.setSelection(atividade.getPrioridade());
         this.atividade = atividade;
     }
 }

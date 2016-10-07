@@ -35,15 +35,7 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-        helper = new FormularioHelper(FormularioActivity.this);
-
-        Intent intent = getIntent();
-        Atividade atividade = (Atividade) intent.getSerializableExtra("atividade");
-        if(atividade != null){
-            helper.preencheFormulario(atividade);
-        }
-
-        final Spinner spinner = (Spinner) findViewById(R.id.formulario_prioridade);
+        Spinner spinner = (Spinner) findViewById(R.id.formulario_prioridade);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(FormularioActivity.this,
                 R.array.Prioridade, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -54,13 +46,13 @@ public class FormularioActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0/*MUITO IMPORTANTE*/:
-                        spinner.setBackgroundColor(rgb(255,0,0));
+                        parent.setBackgroundColor(rgb(255,0,0));
                         break;
                     case 1/*IMPORTANTE*/:
-                        spinner.setBackgroundColor(rgb(255,128,0));
+                        parent.setBackgroundColor(rgb(255,128,0));
                         break;
                     case 2/*NORMAL*/:
-                        spinner.setBackgroundColor(rgb(0,255,0));
+                        parent.setBackgroundColor(rgb(0,255,0));
                         break;
                 }
             }
@@ -73,7 +65,6 @@ public class FormularioActivity extends AppCompatActivity {
 
         Button botao_salvar = (Button) findViewById(R.id.formulario_salvar);
         botao_salvar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 Atividade atividade = helper.getAtividade();
@@ -92,5 +83,21 @@ public class FormularioActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void preencheFormulario() {
+        helper = new FormularioHelper(FormularioActivity.this);
+
+        Intent intent = getIntent();
+        Atividade atividade = (Atividade) intent.getSerializableExtra("atividade");
+        if(atividade != null){
+            helper.preencheFormulario(atividade);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        preencheFormulario();
+        super.onResume();
     }
 }
