@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import fuerback.checklist.adapter.AtividadeAdapter;
 import fuerback.checklist.dao.AtividadeDAO;
 import fuerback.checklist.modelo.Atividade;
 
@@ -70,7 +71,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         List<Atividade> atividades = dao.getAtividades();
         dao.close();
 
-        ArrayAdapter<Atividade> adapter = new ArrayAdapter<Atividade>(this, android.R.layout.simple_list_item_1, atividades);
+        AtividadeAdapter adapter = new AtividadeAdapter(atividades, this);
         listaAtividade.setAdapter(adapter);
     }
 
