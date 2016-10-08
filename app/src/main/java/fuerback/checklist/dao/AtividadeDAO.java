@@ -51,16 +51,47 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
 
-        List<Atividade> alunos = new ArrayList<Atividade>();
+        List<Atividade> atividades = new ArrayList<Atividade>();
         while(cursor.moveToNext()){
             Atividade atividade = new Atividade();
             atividade.setId(cursor.getLong(cursor.getColumnIndex("id")));
             atividade.setNome(cursor.getString(cursor.getColumnIndex("nome")));
             atividade.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
             atividade.setPrioridade(cursor.getInt(cursor.getColumnIndex("prioridade")));
-            alunos.add(atividade);
+            atividades.add(atividade);
         }
-        return alunos;
+        ordenaListAtividadePorPrioridade(atividades);
+        return atividades;
+    }
+
+    private void ordenaListAtividadePorPrioridade(List<Atividade> atividades) {
+        List<Atividade> atividadesMuitoImportantes = new ArrayList<Atividade>();
+        List<Atividade> atividadesImportantes = new ArrayList<Atividade>();
+        List<Atividade> atividadesNormais = new ArrayList<Atividade>();
+
+        for(int i = 0; i < atividades.size(); i++){
+            Atividade atividade = atividades.get(i);
+            if(atividade.getPrioridade() == 0)
+                atividadesMuitoImportantes.add(atividade);
+            else if(atividade.getPrioridade() == 1)
+                atividadesImportantes.add(atividade);
+            else if(atividade.getPrioridade() == 2)
+                atividadesNormais.add(atividade);
+        }
+
+        atividades.clear();
+
+
+        for(int i = 0; i < atividadesMuitoImportantes.size(); i++){
+            atividades.add(atividadesMuitoImportantes.get(i));
+        }
+        for(int i = 0; i < atividadesImportantes.size(); i++){
+            atividades.add(atividadesImportantes.get(i));
+        }
+        for(int i = 0; i < atividadesNormais.size(); i++){
+            atividades.add(atividadesNormais.get(i));
+        }
+
     }
 
     public void deleta(Atividade atividade) {
