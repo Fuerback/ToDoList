@@ -13,41 +13,78 @@ public class Atividade implements Serializable {
     private String descricao;
     private Long id;
 
+    //----------------------------------------------------------------------------------------------
+
 
     public String getNome() {
         return nome;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public int getPrioridade() {
         return prioridade;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public String getDescricao() {
         return descricao;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public Long getId() {
         return id;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void setId(Long id) {
         this.id = id;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     @Override
     public String toString() {
-        return getNome();
+        return getPrioridadeIdentificador() + " - " + getNome();
     }
+
+    //----------------------------------------------------------------------------------------------
+
+    private String getPrioridadeIdentificador() {
+        String identificador = "";
+        switch(prioridade){
+            case 0:
+                identificador = "MI";
+                break;
+            case 1:
+                identificador = "I";
+                break;
+            case 2:
+                identificador = "N";
+        }
+        return identificador;
+    }
+
+    //----------------------------------------------------------------------------------------------
 }

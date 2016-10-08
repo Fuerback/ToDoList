@@ -18,9 +18,13 @@ import java.util.List;
 import fuerback.checklist.dao.AtividadeDAO;
 import fuerback.checklist.modelo.Atividade;
 
+//----------------------------------------------------------------------------------------------
+
 public class ListaAtividadesActivity extends AppCompatActivity {
 
     private ListView listaAtividade;
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +55,15 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         registerForContextMenu(listaAtividade);
     }
 
+    //----------------------------------------------------------------------------------------------
+
     @Override
     protected void onResume() {
         carregaLista();
         super.onResume();
     }
+
+    //----------------------------------------------------------------------------------------------
 
     private void carregaLista() {
         AtividadeDAO dao = new AtividadeDAO(this);
@@ -65,6 +73,8 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         ArrayAdapter<Atividade> adapter = new ArrayAdapter<Atividade>(this, android.R.layout.simple_list_item_1, atividades);
         listaAtividade.setAdapter(adapter);
     }
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -86,4 +96,6 @@ public class ListaAtividadesActivity extends AppCompatActivity {
             }
         });
     }
+
+    //----------------------------------------------------------------------------------------------
 }

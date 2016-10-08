@@ -26,9 +26,13 @@ import static android.graphics.Color.rgb;
  * Created by Usuario on 26/09/2016.
  */
 
+//----------------------------------------------------------------------------------------------
+
 public class FormularioActivity extends AppCompatActivity {
 
     private FormularioHelper helper;
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +89,8 @@ public class FormularioActivity extends AppCompatActivity {
 
     }
 
+    //----------------------------------------------------------------------------------------------
+
     private void preencheFormulario() {
         helper = new FormularioHelper(FormularioActivity.this);
 
@@ -94,6 +100,8 @@ public class FormularioActivity extends AppCompatActivity {
             helper.preencheFormulario(atividade);
         }
     }
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     protected void onResume() {

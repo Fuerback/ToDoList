@@ -13,6 +13,8 @@ import fuerback.checklist.modelo.Atividade;
  * Created by Usuario on 27/09/2016.
  */
 
+//----------------------------------------------------------------------------------------------
+
 public class FormularioHelper {
 
     private final EditText campoNome;
@@ -20,6 +22,8 @@ public class FormularioHelper {
     private final Spinner campoprioridade;
 
     private Atividade atividade;
+
+    //----------------------------------------------------------------------------------------------
 
     FormularioHelper(FormularioActivity activity){
         campoNome = (EditText) activity.findViewById(R.id.formulario_nome);
@@ -29,6 +33,8 @@ public class FormularioHelper {
         atividade = new Atividade();
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public Atividade getAtividade() {
         atividade.setNome(campoNome.getText().toString());
         atividade.setDescricao(campoDescricao.getText().toString());
@@ -36,10 +42,14 @@ public class FormularioHelper {
         return atividade;
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void preencheFormulario(Atividade atividade) {
         campoNome.setText(atividade.getNome());
         campoDescricao.setText(atividade.getDescricao());
         campoprioridade.setSelection(atividade.getPrioridade());
         this.atividade = atividade;
     }
+
+    //----------------------------------------------------------------------------------------------
 }

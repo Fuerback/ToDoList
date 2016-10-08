@@ -15,11 +15,15 @@ import fuerback.checklist.modelo.Atividade;
  * Created by Usuario on 27/09/2016.
  */
 
+//----------------------------------------------------------------------------------------------
+
 public class AtividadeDAO extends SQLiteOpenHelper {
 
     public AtividadeDAO(Context context) {
         super(context, "CheckList", null, 1);
     }
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -27,16 +31,22 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
+    //----------------------------------------------------------------------------------------------
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public void insere(Atividade atividade) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = getDadosAluno(atividade);
         db.insert("CheckList",null, dados);
     }
+
+    //----------------------------------------------------------------------------------------------
 
     private ContentValues getDadosAluno(Atividade atividade) {
         ContentValues dados = new ContentValues();
@@ -45,6 +55,8 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         dados.put("prioridade", atividade.getPrioridade());
         return dados;
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public List<Atividade> getAtividades() {
         String sql = "SELECT * FROM CheckList;";
@@ -63,6 +75,8 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         ordenaListAtividadePorPrioridade(atividades);
         return atividades;
     }
+
+    //----------------------------------------------------------------------------------------------
 
     private void ordenaListAtividadePorPrioridade(List<Atividade> atividades) {
         List<Atividade> atividadesMuitoImportantes = new ArrayList<Atividade>();
@@ -94,11 +108,15 @@ public class AtividadeDAO extends SQLiteOpenHelper {
 
     }
 
+    //----------------------------------------------------------------------------------------------
+
     public void deleta(Atividade atividade) {
         SQLiteDatabase db = getReadableDatabase();
         String[] params = {atividade.getId().toString()};
         db.delete("CheckList", "id = ?", params);
     }
+
+    //----------------------------------------------------------------------------------------------
 
     public void altera(Atividade atividade) {
         SQLiteDatabase db = getReadableDatabase();
@@ -106,4 +124,6 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         String[] params = {atividade.getId().toString()};
         db.update("CheckList", dados, "id = ?", params);
     }
+
+    //----------------------------------------------------------------------------------------------
 }
